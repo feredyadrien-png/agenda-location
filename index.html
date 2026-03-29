@@ -14,84 +14,53 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);min-height:100vh}
-
-  header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px;
-    position:sticky;top:0;z-index:100}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 20px;position:sticky;top:0;z-index:100}
   .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   header h1{font-family:'DM Serif Display',serif;font-size:1.3rem;letter-spacing:-0.02em}
-  .updated{font-size:0.7rem;color:var(--muted)}
-
-  .view-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--bg)}
-  .view-btn{padding:6px 14px;border:none;background:transparent;font-family:'DM Sans',sans-serif;
-    font-size:0.78rem;font-weight:500;cursor:pointer;color:var(--muted);transition:all 0.15s}
+  .view-toggle{display:flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:var(--bg)}
+  .view-btn{padding:6px 14px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;cursor:pointer;color:var(--muted);transition:all 0.15s}
   .view-btn.active{background:var(--text);color:white}
-
   .year-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
-  .year-tab{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface);
-    font-size:0.78rem;font-weight:500;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;
-    white-space:nowrap;transition:all 0.15s}
+  .year-tab{padding:5px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface);font-size:0.78rem;font-weight:500;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.15s}
   .year-tab.active{background:var(--text);color:white;border-color:var(--text)}
-
   .container{max-width:720px;margin:0 auto;padding:20px 16px 80px}
-
-  /* Legend */
   .legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
   .legend-item{display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--muted)}
   .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-
-  /* ===== CALENDAR VIEW ===== */
+  /* Calendar */
   .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-  .cal-nav h2{font-family:'DM Serif Display',serif;font-size:1.1rem;text-transform:capitalize}
-  .nav-btn{background:none;border:1px solid var(--border);border-radius:8px;width:32px;height:32px;
-    cursor:pointer;font-size:1rem;color:var(--text);transition:background 0.15s}
-  .nav-btn:hover{background:var(--border)}
-
+  .cal-nav h2{font-family:'DM Serif Display',serif;font-size:1.1rem}
+  .nav-btn{background:none;border:1px solid var(--border);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:1rem;color:var(--text)}
   .cal-grid{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden}
   .cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--border)}
-  .cal-day-name{text-align:center;padding:8px 4px;font-size:0.68rem;font-weight:500;
-    text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)}
+  .cal-day-name{text-align:center;padding:8px 2px;font-size:0.65rem;font-weight:500;text-transform:uppercase;color:var(--muted)}
   .cal-cells{display:grid;grid-template-columns:repeat(7,1fr)}
-  .cal-cell{min-height:52px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);
-    padding:4px;position:relative;cursor:default}
+  .cal-cell{min-height:52px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:3px;position:relative}
   .cal-cell:nth-child(7n){border-right:none}
   .cal-cell.empty{background:var(--bg)}
   .cal-cell.today{background:#FEF9F0}
   .cal-cell.has-stay{cursor:pointer}
-  .cal-num{font-size:0.72rem;font-weight:500;color:var(--muted);margin-bottom:2px}
+  .cal-num{font-size:0.68rem;font-weight:500;color:var(--muted);margin-bottom:1px}
   .cal-cell.today .cal-num{color:var(--accent);font-weight:700}
-
-  .stay-bar{border-radius:3px;padding:1px 4px;font-size:0.6rem;font-weight:500;
-    color:white;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-bottom:1px;line-height:1.4}
+  .stay-bar{border-radius:3px;padding:1px 3px;font-size:0.58rem;font-weight:500;color:white;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;margin-bottom:1px;line-height:1.4}
   .stay-airbnb{background:var(--airbnb)}
   .stay-booking{background:var(--booking)}
   .stay-direct{background:var(--direct)}
-
-  /* Tooltip */
-  .tooltip{position:fixed;background:var(--text);color:white;padding:10px 14px;border-radius:10px;
-    font-size:0.78rem;z-index:500;pointer-events:none;max-width:200px;line-height:1.5;
-    box-shadow:0 4px 16px rgba(0,0,0,0.2);display:none}
-
-  /* ===== LIST VIEW ===== */
+  .tooltip{position:fixed;background:var(--text);color:white;padding:10px 14px;border-radius:10px;font-size:0.78rem;z-index:500;pointer-events:none;max-width:200px;line-height:1.5;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:none}
+  /* List */
   .filter-bar{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:2px}
-  .filter-btn{padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:var(--surface);
-    font-size:0.75rem;font-weight:500;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;
-    white-space:nowrap;transition:all 0.15s}
+  .filter-btn{padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:var(--surface);font-size:0.75rem;font-weight:500;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.15s}
   .filter-btn.active{background:var(--accent);color:white;border-color:var(--accent)}
-
   .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .section-header h2{font-family:'DM Serif Display',serif;font-size:1.05rem}
   .count-label{font-size:0.75rem;color:var(--muted)}
-
   .reservations-list{display:flex;flex-direction:column;gap:10px}
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;
-    display:flex;gap:14px;align-items:flex-start;transition:box-shadow 0.15s;
-    border-left:4px solid var(--border)}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;gap:14px;align-items:flex-start;transition:box-shadow 0.15s;border-left:4px solid var(--border)}
   .card:hover{box-shadow:0 3px 14px rgba(0,0,0,0.06)}
   .card.past{opacity:0.42}
   .card.platform-airbnb{border-left-color:var(--airbnb)}
   .card.platform-booking{border-left-color:var(--booking)}
   .card.platform-direct{border-left-color:var(--direct)}
-
   .card-left{min-width:46px;text-align:center;flex-shrink:0}
   .date-day{font-family:'DM Serif Display',serif;font-size:1.5rem;line-height:1}
   .date-month{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);font-weight:500}
@@ -110,17 +79,10 @@
   .tag-dog{background:#FDF0E6;color:#E07A3A}
   .tag-cat{background:#F5EEF8;color:#9B59B6}
   .tag-menage{background:#FEF3E2;color:var(--accent)}
-
-  .month-sep{font-size:0.7rem;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;
-    color:var(--muted);padding:10px 4px 2px}
-  .month-recap{background:var(--surface);border:1px solid var(--border);border-radius:10px;
-    padding:10px 14px;font-size:0.82rem;color:var(--muted);margin-top:4px;margin-bottom:8px}
-  .month-recap strong{color:var(--accent)}
-
+  .month-sep{font-size:0.7rem;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);padding:10px 4px 2px}
   .empty-state{text-align:center;padding:52px 24px;color:var(--muted)}
   .empty-state .icon{font-size:2.8rem;margin-bottom:12px}
   .empty-state p{font-size:0.88rem;line-height:1.6}
-
   @media(max-width:600px){
     header h1{font-size:1.1rem}
     .cal-cell{min-height:44px;padding:2px}
@@ -131,7 +93,6 @@
 </style>
 </head>
 <body>
-
 <header>
   <div class="header-top">
     <h1>🏠 Agenda Location</h1>
@@ -142,16 +103,13 @@
   </div>
   <div class="year-tabs" id="year-tabs"></div>
 </header>
-
 <div class="container">
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--airbnb)"></div>Airbnb</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--booking)"></div>Booking</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--direct)"></div>Direct</div>
-    <span style="font-size:0.7rem;color:var(--muted);margin-left:auto">Mis à jour le 29/03/2026 à 17:55</span>
+    <span style="font-size:0.7rem;color:var(--muted);margin-left:auto">Mis à jour le 29/03/2026 à 18:01</span>
   </div>
-
-  <!-- Calendar view -->
   <div id="view-calendar" style="display:none">
     <div class="cal-nav">
       <button class="nav-btn" onclick="prevMonth()">‹</button>
@@ -160,19 +118,14 @@
     </div>
     <div class="cal-grid">
       <div class="cal-days-header">
-        <div class="cal-day-name">Lun</div>
-        <div class="cal-day-name">Mar</div>
-        <div class="cal-day-name">Mer</div>
-        <div class="cal-day-name">Jeu</div>
-        <div class="cal-day-name">Ven</div>
-        <div class="cal-day-name">Sam</div>
+        <div class="cal-day-name">Lun</div><div class="cal-day-name">Mar</div>
+        <div class="cal-day-name">Mer</div><div class="cal-day-name">Jeu</div>
+        <div class="cal-day-name">Ven</div><div class="cal-day-name">Sam</div>
         <div class="cal-day-name">Dim</div>
       </div>
       <div class="cal-cells" id="cal-cells"></div>
     </div>
   </div>
-
-  <!-- List view -->
   <div id="view-list">
     <div class="filter-bar">
       <button class="filter-btn active" onclick="setFilter('upcoming',this)">À venir</button>
@@ -186,43 +139,24 @@
     <div class="reservations-list" id="list"></div>
   </div>
 </div>
-
 <div class="tooltip" id="tooltip"></div>
-
 <script>
-  const ALL_DATA = {"2024": {"reservations": [{"name": "Pailler", "checkin": "2024-08-04", "checkout": "2024-08-06", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.3, "platform": "direct"}, {"name": "Dominique", "checkin": "2024-08-06", "checkout": "2024-08-10", "nights": 4, "lits": 1, "personnes": 25, "animal": "", "menage": 8.94, "platform": "direct"}, {"name": "Sabrina", "checkin": "2024-08-10", "checkout": "2024-08-12", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.7, "platform": "direct"}, {"name": "Floriane", "checkin": "2024-08-12", "checkout": "2024-08-14", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.7, "platform": "direct"}, {"name": "Noriko", "checkin": "2024-08-14", "checkout": "2024-08-25", "nights": 11, "lits": 1, "personnes": 25, "animal": "", "menage": 19.66, "platform": "direct"}, {"name": "Franck", "checkin": "2024-08-26", "checkout": "2024-08-30", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 10.01, "platform": "direct"}, {"name": "Pailler", "checkin": "2024-08-30", "checkout": "2024-09-01", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Michel", "checkin": "2024-09-09", "checkout": "2024-09-11", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 3.96, "platform": "direct"}, {"name": "Hanck", "checkin": "2024-09-12", "checkout": "2024-09-15", "nights": 3, "lits": 1, "personnes": 25, "animal": "", "menage": 6.48, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-09-23", "checkout": "2024-09-27", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 8.04, "platform": "direct"}, {"name": "Sandrine", "checkin": "2024-09-27", "checkout": "2024-09-29", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 3.96, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-10-07", "checkout": "2024-01-11", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Fiona", "checkin": "2024-10-11", "checkout": "2024-10-14", "nights": 3, "lits": 1, "personnes": 5, "animal": "", "menage": 5.94, "platform": "direct"}, {"name": "Philippe", "checkin": "2024-10-14", "checkout": "2024-10-16", "nights": 2, "lits": 1, "personnes": 25, "animal": "", "menage": 4.32, "platform": "direct"}, {"name": "Jimmy", "checkin": "2024-10-18", "checkout": "2024-10-21", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 7.2, "platform": "direct"}, {"name": "Alexandre", "checkin": "2024-10-28", "checkout": "2024-10-31", "nights": 3, "lits": 1, "personnes": 25, "animal": "", "menage": 6.48, "platform": "direct"}, {"name": "Franck", "checkin": "2024-11-01", "checkout": "2024-11-04", "nights": 3, "lits": 2, "personnes": 10, "animal": "", "menage": 6.66, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-11-04", "checkout": "2024-11-08", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Alisone", "checkin": "2024-11-08", "checkout": "2024-11-10", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.04, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-11-12", "checkout": "2024-11-14", "nights": 0, "lits": 0, "personnes": 0, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Théo", "checkin": "2024-12-03", "checkout": "2024-12-05", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.32, "platform": "direct"}, {"name": "Gaelle", "checkin": "2024-12-13", "checkout": "2024-12-16", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.66, "platform": "direct"}, {"name": "Marie", "checkin": "2024-12-26", "checkout": "2025-01-02", "nights": 7, "lits": 1, "personnes": 25, "animal": "", "menage": 14.28, "platform": "direct"}], "monthly_totals": {}}, "2025": {"reservations": [{"name": "Raverdy", "checkin": "2025-01-03", "checkout": "2025-01-05", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.04, "platform": "airbnb"}, {"name": "Axel", "checkin": "2025-01-06", "checkout": "2025-01-08", "nights": 2, "lits": 2, "personnes": 10, "animal": "", "menage": 4.5, "platform": "airbnb"}, {"name": "Caroline", "checkin": "2025-01-14", "checkout": "2025-01-17", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 5.94, "platform": "airbnb"}, {"name": "Maélys", "checkin": "2025-01-18", "checkout": "2025-01-20", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Ferreira", "checkin": "2025-01-27", "checkout": "2025-01-30", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 5.94, "platform": "airbnb"}, {"name": "Ferreira", "checkin": "2025-02-03", "checkout": "2025-02-05", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Sarah", "checkin": "2025-02-21", "checkout": "2025-02-23", "nights": 2, "lits": 2, "personnes": 10, "animal": "", "menage": 4.32, "platform": "airbnb"}, {"name": "Sandrine", "checkin": "2025-02-23", "checkout": "2025-02-25", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Manon", "checkin": "2025-03-04", "checkout": "2025-03-06", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.5, "platform": "airbnb"}, {"name": "Eloise", "checkin": "2025-03-21", "checkout": "2025-03-23", "nights": 2, "lits": 1, "personnes": 10, "animal": "", "menage": 4.32, "platform": "airbnb"}, {"name": "Christel", "checkin": "2025-03-25", "checkout": "2025-03-37", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Murielle", "checkin": "2025-04-06", "checkout": "2025-04-11", "nights": 5, "lits": 2, "personnes": 30, "animal": "", "menage": 9.18, "platform": "airbnb"}, {"name": "Cécile", "checkin": "2025-04-12", "checkout": "2025-04-19", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 12.0, "platform": "airbnb"}, {"name": "Jean Christophe", "checkin": "2025-04-19", "checkout": "2025-04-21", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.32, "platform": "airbnb"}, {"name": "Emilie", "checkin": "2025-04-28", "checkout": "2025-04-30", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Aymeric", "checkin": "2025-04-30", "checkout": "2025-05-04", "nights": 4, "lits": 1, "personnes": 5, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Karine", "checkin": "2025-05-07", "checkout": "2025-05-09", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.4, "platform": "airbnb"}, {"name": "Angélique", "checkin": "2025-11-09", "checkout": "2025-11-11", "nights": 2, "lits": 1, "personnes": 5, "animal": "", "menage": 5.17, "platform": "airbnb"}, {"name": "Hatem", "checkin": "2025-05-13", "checkout": "2025-05-16", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 5.95, "platform": "airbnb"}, {"name": "Skander", "checkin": "2025-05-23", "checkout": "2025-05-30", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 13.39, "platform": "airbnb"}, {"name": "Lea Navarro", "checkin": "2025-05-31", "checkout": "2025-06-03", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 46.92, "platform": "booking"}, {"name": "Elodie", "checkin": "2025-06-07", "checkout": "2025-06-11", "nights": 4, "lits": 1, "personnes": 25, "animal": "", "menage": 9.72, "platform": "airbnb"}, {"name": "Alain", "checkin": "2025-06-15", "checkout": "2025-06-22", "nights": 7, "lits": 1, "personnes": 10, "animal": "", "menage": 14.11, "platform": "airbnb"}, {"name": "Cécile", "checkin": "2025-06-22", "checkout": "2025-06-28", "nights": 6, "lits": 2, "personnes": 30, "animal": "", "menage": 5.28, "platform": "direct"}, {"name": "Jordan", "checkin": "2025-07-07", "checkout": "2025-07-10", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 8.51, "platform": "airbnb"}, {"name": "Antoine", "checkin": "2025-07-17", "checkout": "2025-07-21", "nights": 4, "lits": 1, "personnes": 0, "animal": "", "menage": 10.13, "platform": "airbnb"}, {"name": "Marie-Cécile", "checkin": "2025-07-21", "checkout": "2025-07-25", "nights": 4, "lits": 2, "personnes": 0, "animal": "", "menage": 11.52, "platform": "airbnb"}, {"name": "Cam", "checkin": "2025-07-25", "checkout": "2025-07-27", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 6.12, "platform": "airbnb"}, {"name": "Marlène", "checkin": "2025-07-27", "checkout": "2025-08-01", "nights": 5, "lits": 2, "personnes": 30, "animal": "", "menage": 14.4, "platform": "airbnb"}, {"name": "Julien", "checkin": "2025-08-01", "checkout": "2025-08-03", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 6.12, "platform": "airbnb"}, {"name": "Richard", "checkin": "2025-08-04", "checkout": "2025-08-08", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 11.16, "platform": "airbnb"}, {"name": "Ophélie", "checkin": "2025-08-09", "checkout": "2025-08-16", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 18.67, "platform": "airbnb"}, {"name": "Joelle", "checkin": "2025-08-16", "checkout": "2025-08-22", "nights": 6, "lits": 2, "personnes": 30, "animal": "", "menage": 16.56, "platform": "airbnb"}, {"name": "Coelho", "checkin": "2025-08-22", "checkout": "2025-08-29", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "airbnb"}, {"name": "Sowaly", "checkin": "2025-09-05", "checkout": "2025-09-08", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Isabelle et René", "checkin": "2025-09-10", "checkout": "2025-09-15", "nights": 5, "lits": 2, "personnes": 30, "animal": "", "menage": 10.08, "platform": "airbnb"}, {"name": "Camille Emma", "checkin": "2025-09-16", "checkout": "2025-09-19", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Erwan", "checkin": "2025-09-19", "checkout": "2025-09-21", "nights": 2, "lits": 1, "personnes": 25, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Caroline", "checkin": "2025-09-29", "checkout": "2025-10-10", "nights": 11, "lits": 2, "personnes": 30, "animal": "", "menage": "", "platform": "direct"}, {"name": "Olivier", "checkin": "2025-10-20", "checkout": "2025-10-22", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.4, "platform": "airbnb"}, {"name": "Lucie", "checkin": "2025-10-22", "checkout": "2025-10-24", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": "", "platform": "direct"}, {"name": "Fabienne", "checkin": "2025-10-13", "checkout": "2025-10-17", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 8.28, "platform": "airbnb"}, {"name": "Aurélie", "checkin": "2025-10-24", "checkout": "2025-10-27", "nights": 3, "lits": 2, "personnes": 20, "animal": "", "menage": 7.2, "platform": "airbnb"}, {"name": "Jean Marc", "checkin": "2025-10-27", "checkout": "2025-10-30", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Audrey", "checkin": "2025-10-30", "checkout": "2025-11-01", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Pascal", "checkin": "2025-11-08", "checkout": "2025-11-11", "nights": 3, "lits": 3, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Ayoub", "checkin": "2025-11-26", "checkout": "2025-11-28", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Pat", "checkin": "2025-12-14", "checkout": "2025-12-21", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 13.64, "platform": "airbnb"}, {"name": "Helene", "checkin": "2025-12-22", "checkout": "2025-12-28", "nights": 6, "lits": 2, "personnes": 30, "animal": "", "menage": 12.6, "platform": "airbnb"}], "monthly_totals": {}}, "2026": {"reservations": [{"name": "Anicet", "checkin": "2026-01-26", "checkout": "2026-01-30", "nights": 4, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Celine", "checkin": "2026-01-30", "checkout": "2026-02-01", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Mickael", "checkin": "2026-02-03", "checkout": "2026-02-05", "nights": 2, "lits": 2, "personnes": 2, "animal": "", "menage": 10.0, "platform": "airbnb"}, {"name": "Anicet", "checkin": "2026-02-06", "checkout": "2026-02-10", "nights": 5, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Cathy", "checkin": "2026-02-14", "checkout": "2026-02-16", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Laure", "checkin": "2026-02-19", "checkout": "2026-02-21", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 10.0, "platform": "airbnb"}, {"name": "Arié", "checkin": "2026-03-01", "checkout": "2026-03-05", "nights": 4, "lits": 1, "personnes": 2, "animal": "", "menage": 25.0, "platform": "airbnb"}, {"name": "Jerome", "checkin": "2026-03-06", "checkout": "2026-03-08", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Timothée", "checkin": "2026-03-09", "checkout": "2026-03-13", "nights": 4, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Bernard", "checkin": "2026-03-18", "checkout": "2026-03-25", "nights": 7, "lits": 1, "personnes": 1, "animal": "", "menage": 25.0, "platform": "direct"}, {"name": "Rouland", "checkin": "2026-03-30", "checkout": "2026-04-01", "nights": 2, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Saioa", "checkin": "2026-04-02", "checkout": "2026-04-06", "nights": 4, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Jimmy", "checkin": "2026-04-08", "checkout": "2026-04-13", "nights": 5, "lits": 2, "personnes": 4, "animal": "", "menage": 0.0, "platform": "airbnb"}, {"name": "Nathalie", "checkin": "2026-04-13", "checkout": "2026-04-20", "nights": 7, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Chantale", "checkin": "2026-04-20", "checkout": "2026-04-24", "nights": 4, "lits": 2, "personnes": 2, "animal": "CHIEN", "menage": 30.0, "platform": "airbnb"}, {"name": "Vitor", "checkin": "2026-04-25", "checkout": "2026-05-02", "nights": 7, "lits": 1, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Daniel", "checkin": "2026-05-04", "checkout": "2026-05-09", "nights": 5, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Karine", "checkin": "2026-05-13", "checkout": "2026-05-18", "nights": 5, "lits": 2, "personnes": 3, "animal": "CHAT", "menage": 30.0, "platform": "booking"}, {"name": "Isabelle", "checkin": "2026-05-18", "checkout": "2026-05-22", "nights": 4, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Beatrix", "checkin": "2026-05-22", "checkout": "2026-05-25", "nights": 3, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Brigitte", "checkin": "2026-05-25", "checkout": "2026-05-29", "nights": 5, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Pierre Emile Joseph", "checkin": "2026-05-31", "checkout": "2026-06-06", "nights": 6, "lits": 1, "personnes": 2, "animal": "", "menage": 25.0, "platform": "airbnb"}, {"name": "Johan", "checkin": "2026-07-04", "checkout": "2026-07-18", "nights": 14, "lits": 1, "personnes": 2, "animal": "CHIEN", "menage": 25.0, "platform": "airbnb"}, {"name": "Laura", "checkin": "2026-08-02", "checkout": "2026-08-08", "nights": 6, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Estelle", "checkin": "2026-08-08", "checkout": "2026-08-15", "nights": 7, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Melody", "checkin": "2026-08-15", "checkout": "2026-08-22", "nights": 7, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}], "monthly_totals": {}}};
-  // Normalize: support both old flat array and new object structure
-  function getRes(year) {
-    const d = ALL_DATA[year];
-    if (!d) return [];
-    return Array.isArray(d) ? d : (d.reservations || []);
-  }
-  function getMonthlyTotals(year) {
-    const d = ALL_DATA[year];
-    if (!d || Array.isArray(d)) return {};
-    return d.monthly_totals || {};
-  }
+  const ALL_DATA = {"2024": [{"name": "Pailler", "checkin": "2024-08-04", "checkout": "2024-08-06", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.3, "platform": "direct"}, {"name": "Dominique", "checkin": "2024-08-06", "checkout": "2024-08-10", "nights": 4, "lits": 1, "personnes": 25, "animal": "", "menage": 8.94, "platform": "direct"}, {"name": "Sabrina", "checkin": "2024-08-10", "checkout": "2024-08-12", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.7, "platform": "direct"}, {"name": "Floriane", "checkin": "2024-08-12", "checkout": "2024-08-14", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.7, "platform": "direct"}, {"name": "Noriko", "checkin": "2024-08-14", "checkout": "2024-08-25", "nights": 11, "lits": 1, "personnes": 25, "animal": "", "menage": 19.66, "platform": "direct"}, {"name": "Franck", "checkin": "2024-08-26", "checkout": "2024-08-30", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 10.01, "platform": "direct"}, {"name": "Pailler", "checkin": "2024-08-30", "checkout": "2024-09-01", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Michel", "checkin": "2024-09-09", "checkout": "2024-09-11", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 3.96, "platform": "direct"}, {"name": "Hanck", "checkin": "2024-09-12", "checkout": "2024-09-15", "nights": 3, "lits": 1, "personnes": 25, "animal": "", "menage": 6.48, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-09-23", "checkout": "2024-09-27", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 8.04, "platform": "direct"}, {"name": "Sandrine", "checkin": "2024-09-27", "checkout": "2024-09-29", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 3.96, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-10-07", "checkout": "2024-01-11", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Fiona", "checkin": "2024-10-11", "checkout": "2024-10-14", "nights": 3, "lits": 1, "personnes": 5, "animal": "", "menage": 5.94, "platform": "direct"}, {"name": "Philippe", "checkin": "2024-10-14", "checkout": "2024-10-16", "nights": 2, "lits": 1, "personnes": 25, "animal": "", "menage": 4.32, "platform": "direct"}, {"name": "Jimmy", "checkin": "2024-10-18", "checkout": "2024-10-21", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 7.2, "platform": "direct"}, {"name": "Alexandre", "checkin": "2024-10-28", "checkout": "2024-10-31", "nights": 3, "lits": 1, "personnes": 25, "animal": "", "menage": 6.48, "platform": "direct"}, {"name": "Franck", "checkin": "2024-11-01", "checkout": "2024-11-04", "nights": 3, "lits": 2, "personnes": 10, "animal": "", "menage": 6.66, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-11-04", "checkout": "2024-11-08", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Alisone", "checkin": "2024-11-08", "checkout": "2024-11-10", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.04, "platform": "direct"}, {"name": "Alessandro", "checkin": "2024-11-12", "checkout": "2024-11-14", "nights": 0, "lits": 0, "personnes": 0, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Théo", "checkin": "2024-12-03", "checkout": "2024-12-05", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.32, "platform": "direct"}, {"name": "Gaelle", "checkin": "2024-12-13", "checkout": "2024-12-16", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.66, "platform": "direct"}, {"name": "Marie", "checkin": "2024-12-26", "checkout": "2025-01-02", "nights": 7, "lits": 1, "personnes": 25, "animal": "", "menage": 14.28, "platform": "direct"}], "2025": [{"name": "Raverdy", "checkin": "2025-01-03", "checkout": "2025-01-05", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.04, "platform": "airbnb"}, {"name": "Axel", "checkin": "2025-01-06", "checkout": "2025-01-08", "nights": 2, "lits": 2, "personnes": 10, "animal": "", "menage": 4.5, "platform": "airbnb"}, {"name": "Caroline", "checkin": "2025-01-14", "checkout": "2025-01-17", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 5.94, "platform": "airbnb"}, {"name": "Maélys", "checkin": "2025-01-18", "checkout": "2025-01-20", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Ferreira", "checkin": "2025-01-27", "checkout": "2025-01-30", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 5.94, "platform": "airbnb"}, {"name": "Ferreira", "checkin": "2025-02-03", "checkout": "2025-02-05", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Sarah", "checkin": "2025-02-21", "checkout": "2025-02-23", "nights": 2, "lits": 2, "personnes": 10, "animal": "", "menage": 4.32, "platform": "airbnb"}, {"name": "Sandrine", "checkin": "2025-02-23", "checkout": "2025-02-25", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Manon", "checkin": "2025-03-04", "checkout": "2025-03-06", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.5, "platform": "airbnb"}, {"name": "Eloise", "checkin": "2025-03-21", "checkout": "2025-03-23", "nights": 2, "lits": 1, "personnes": 10, "animal": "", "menage": 4.32, "platform": "airbnb"}, {"name": "Christel", "checkin": "2025-03-25", "checkout": "2025-03-37", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Murielle", "checkin": "2025-04-06", "checkout": "2025-04-11", "nights": 5, "lits": 2, "personnes": 30, "animal": "", "menage": 9.18, "platform": "airbnb"}, {"name": "Cécile", "checkin": "2025-04-12", "checkout": "2025-04-19", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 12.0, "platform": "airbnb"}, {"name": "Jean Christophe", "checkin": "2025-04-19", "checkout": "2025-04-21", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.32, "platform": "airbnb"}, {"name": "Emilie", "checkin": "2025-04-28", "checkout": "2025-04-30", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Aymeric", "checkin": "2025-04-30", "checkout": "2025-05-04", "nights": 4, "lits": 1, "personnes": 5, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Karine", "checkin": "2025-05-07", "checkout": "2025-05-09", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.4, "platform": "airbnb"}, {"name": "Angélique", "checkin": "2025-11-09", "checkout": "2025-11-11", "nights": 2, "lits": 1, "personnes": 5, "animal": "", "menage": 5.17, "platform": "airbnb"}, {"name": "Hatem", "checkin": "2025-05-13", "checkout": "2025-05-16", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 5.95, "platform": "airbnb"}, {"name": "Skander", "checkin": "2025-05-23", "checkout": "2025-05-30", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 13.39, "platform": "airbnb"}, {"name": "Lea Navarro", "checkin": "2025-05-31", "checkout": "2025-06-03", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 46.92, "platform": "booking"}, {"name": "Elodie", "checkin": "2025-06-07", "checkout": "2025-06-11", "nights": 4, "lits": 1, "personnes": 25, "animal": "", "menage": 9.72, "platform": "airbnb"}, {"name": "Alain", "checkin": "2025-06-15", "checkout": "2025-06-22", "nights": 7, "lits": 1, "personnes": 10, "animal": "", "menage": 14.11, "platform": "airbnb"}, {"name": "Cécile", "checkin": "2025-06-22", "checkout": "2025-06-28", "nights": 6, "lits": 2, "personnes": 30, "animal": "", "menage": 5.28, "platform": "direct"}, {"name": "Jordan", "checkin": "2025-07-07", "checkout": "2025-07-10", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 8.51, "platform": "airbnb"}, {"name": "Antoine", "checkin": "2025-07-17", "checkout": "2025-07-21", "nights": 4, "lits": 1, "personnes": 0, "animal": "", "menage": 10.13, "platform": "airbnb"}, {"name": "Marie-Cécile", "checkin": "2025-07-21", "checkout": "2025-07-25", "nights": 4, "lits": 2, "personnes": 0, "animal": "", "menage": 11.52, "platform": "airbnb"}, {"name": "Cam", "checkin": "2025-07-25", "checkout": "2025-07-27", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 6.12, "platform": "airbnb"}, {"name": "Marlène", "checkin": "2025-07-27", "checkout": "2025-08-01", "nights": 5, "lits": 2, "personnes": 30, "animal": "", "menage": 14.4, "platform": "airbnb"}, {"name": "Julien", "checkin": "2025-08-01", "checkout": "2025-08-03", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 6.12, "platform": "airbnb"}, {"name": "Richard", "checkin": "2025-08-04", "checkout": "2025-08-08", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 11.16, "platform": "airbnb"}, {"name": "Ophélie", "checkin": "2025-08-09", "checkout": "2025-08-16", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 18.67, "platform": "airbnb"}, {"name": "Joelle", "checkin": "2025-08-16", "checkout": "2025-08-22", "nights": 6, "lits": 2, "personnes": 30, "animal": "", "menage": 16.56, "platform": "airbnb"}, {"name": "Coelho", "checkin": "2025-08-22", "checkout": "2025-08-29", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 0.0, "platform": "airbnb"}, {"name": "Sowaly", "checkin": "2025-09-05", "checkout": "2025-09-08", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Isabelle et René", "checkin": "2025-09-10", "checkout": "2025-09-15", "nights": 5, "lits": 2, "personnes": 30, "animal": "", "menage": 10.08, "platform": "airbnb"}, {"name": "Camille Emma", "checkin": "2025-09-16", "checkout": "2025-09-19", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Erwan", "checkin": "2025-09-19", "checkout": "2025-09-21", "nights": 2, "lits": 1, "personnes": 25, "animal": "", "menage": 0.0, "platform": "direct"}, {"name": "Caroline", "checkin": "2025-09-29", "checkout": "2025-10-10", "nights": 11, "lits": 2, "personnes": 30, "animal": "", "menage": "", "platform": "direct"}, {"name": "Olivier", "checkin": "2025-10-20", "checkout": "2025-10-22", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 5.4, "platform": "airbnb"}, {"name": "Lucie", "checkin": "2025-10-22", "checkout": "2025-10-24", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": "", "platform": "direct"}, {"name": "Fabienne", "checkin": "2025-10-13", "checkout": "2025-10-17", "nights": 4, "lits": 2, "personnes": 30, "animal": "", "menage": 8.28, "platform": "airbnb"}, {"name": "Aurélie", "checkin": "2025-10-24", "checkout": "2025-10-27", "nights": 3, "lits": 2, "personnes": 20, "animal": "", "menage": 7.2, "platform": "airbnb"}, {"name": "Jean Marc", "checkin": "2025-10-27", "checkout": "2025-10-30", "nights": 3, "lits": 2, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Audrey", "checkin": "2025-10-30", "checkout": "2025-11-01", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Pascal", "checkin": "2025-11-08", "checkout": "2025-11-11", "nights": 3, "lits": 3, "personnes": 30, "animal": "", "menage": 6.48, "platform": "airbnb"}, {"name": "Ayoub", "checkin": "2025-11-26", "checkout": "2025-11-28", "nights": 2, "lits": 2, "personnes": 30, "animal": "", "menage": 4.68, "platform": "airbnb"}, {"name": "Pat", "checkin": "2025-12-14", "checkout": "2025-12-21", "nights": 7, "lits": 2, "personnes": 30, "animal": "", "menage": 13.64, "platform": "airbnb"}, {"name": "Helene", "checkin": "2025-12-22", "checkout": "2025-12-28", "nights": 6, "lits": 2, "personnes": 30, "animal": "", "menage": 12.6, "platform": "airbnb"}], "2026": [{"name": "Anicet", "checkin": "2026-01-26", "checkout": "2026-01-30", "nights": 4, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Celine", "checkin": "2026-01-30", "checkout": "2026-02-01", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Mickael", "checkin": "2026-02-03", "checkout": "2026-02-05", "nights": 2, "lits": 2, "personnes": 2, "animal": "", "menage": 10.0, "platform": "airbnb"}, {"name": "Anicet", "checkin": "2026-02-06", "checkout": "2026-02-10", "nights": 5, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Cathy", "checkin": "2026-02-14", "checkout": "2026-02-16", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Laure", "checkin": "2026-02-19", "checkout": "2026-02-21", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 10.0, "platform": "airbnb"}, {"name": "Arié", "checkin": "2026-03-01", "checkout": "2026-03-05", "nights": 4, "lits": 1, "personnes": 2, "animal": "", "menage": 25.0, "platform": "airbnb"}, {"name": "Jerome", "checkin": "2026-03-06", "checkout": "2026-03-08", "nights": 2, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Timothée", "checkin": "2026-03-09", "checkout": "2026-03-13", "nights": 4, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Bernard", "checkin": "2026-03-18", "checkout": "2026-03-25", "nights": 7, "lits": 1, "personnes": 1, "animal": "", "menage": 25.0, "platform": "direct"}, {"name": "Rouland", "checkin": "2026-03-30", "checkout": "2026-04-01", "nights": 2, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Saioa", "checkin": "2026-04-02", "checkout": "2026-04-06", "nights": 4, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Jimmy", "checkin": "2026-04-08", "checkout": "2026-04-13", "nights": 5, "lits": 2, "personnes": 4, "animal": "", "menage": 0.0, "platform": "airbnb"}, {"name": "Nathalie", "checkin": "2026-04-13", "checkout": "2026-04-20", "nights": 7, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Chantale", "checkin": "2026-04-20", "checkout": "2026-04-24", "nights": 4, "lits": 2, "personnes": 2, "animal": "CHIEN", "menage": 30.0, "platform": "airbnb"}, {"name": "Vitor", "checkin": "2026-04-25", "checkout": "2026-05-02", "nights": 7, "lits": 1, "personnes": 2, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Daniel", "checkin": "2026-05-04", "checkout": "2026-05-09", "nights": 5, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Karine", "checkin": "2026-05-13", "checkout": "2026-05-18", "nights": 5, "lits": 2, "personnes": 3, "animal": "CHAT", "menage": 30.0, "platform": "booking"}, {"name": "Isabelle", "checkin": "2026-05-18", "checkout": "2026-05-22", "nights": 4, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Beatrix", "checkin": "2026-05-22", "checkout": "2026-05-25", "nights": 3, "lits": 2, "personnes": 2, "animal": "", "menage": 30.0, "platform": "booking"}, {"name": "Brigitte", "checkin": "2026-05-25", "checkout": "2026-05-29", "nights": 5, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Pierre Emile Joseph", "checkin": "2026-05-31", "checkout": "2026-06-06", "nights": 6, "lits": 1, "personnes": 2, "animal": "", "menage": 25.0, "platform": "airbnb"}, {"name": "Johan", "checkin": "2026-07-04", "checkout": "2026-07-18", "nights": 14, "lits": 1, "personnes": 2, "animal": "CHIEN", "menage": 25.0, "platform": "airbnb"}, {"name": "Laura", "checkin": "2026-08-02", "checkout": "2026-08-08", "nights": 6, "lits": 2, "personnes": 3, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Estelle", "checkin": "2026-08-08", "checkout": "2026-08-15", "nights": 7, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}, {"name": "Melody", "checkin": "2026-08-15", "checkout": "2026-08-22", "nights": 7, "lits": 2, "personnes": 4, "animal": "", "menage": 30.0, "platform": "airbnb"}]};
   const MONTHS_FR   = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
   const MONTHS_LONG = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-  const DAYS_FR     = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
 
-  let currentYear   = '';
-  let currentView   = 'list';
-  let currentFilter = 'upcoming';
+  let currentYear = '', currentView = 'list', currentFilter = 'upcoming';
   let calYear, calMonth;
   const today = new Date().toISOString().split('T')[0];
   const years = Object.keys(ALL_DATA).sort((a,b)=>b-a);
 
-  // Init year
   for (const y of years) {
-    if (getRes(y).some(r => r.checkout >= today)) { currentYear = y; break; }
+    if (ALL_DATA[y] && ALL_DATA[y].some(r => r.checkout >= today)) { currentYear = y; break; }
   }
   if (!currentYear && years.length) currentYear = years[0];
-
   calYear  = parseInt(currentYear);
   calMonth = new Date().getMonth();
 
-  // ——— Year tabs ———
   function renderYearTabs() {
     document.getElementById('year-tabs').innerHTML = years.map(y =>
       `<button class="year-tab ${y===currentYear?'active':''}" onclick="setYear('${y}',this)">${y}</button>`
@@ -230,85 +164,51 @@
   }
 
   function setYear(y, btn) {
-    currentYear = y;
-    calYear = parseInt(y);
+    currentYear = y; calYear = parseInt(y);
     document.querySelectorAll('.year-tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    if (currentView === 'calendar') renderCalendar();
-    else renderList();
+    if (currentView==='calendar') renderCalendar(); else renderList();
   }
 
-  // ——— View toggle ———
   function setView(v) {
     currentView = v;
-    document.getElementById('view-calendar').style.display = v==='calendar' ? 'block' : 'none';
-    document.getElementById('view-list').style.display     = v==='list'     ? 'block' : 'none';
+    document.getElementById('view-calendar').style.display = v==='calendar'?'block':'none';
+    document.getElementById('view-list').style.display     = v==='list'?'block':'none';
     document.getElementById('btn-cal').classList.toggle('active',  v==='calendar');
     document.getElementById('btn-list').classList.toggle('active', v==='list');
-    if (v==='calendar') renderCalendar();
-    else renderList();
+    if (v==='calendar') renderCalendar(); else renderList();
   }
 
-  // ——— Calendar ———
-  function prevMonth() {
-    calMonth--;
-    if (calMonth < 0) { calMonth = 11; calYear--; }
-    renderCalendar();
-  }
-  function nextMonth() {
-    calMonth++;
-    if (calMonth > 11) { calMonth = 0; calYear++; }
-    renderCalendar();
-  }
+  function prevMonth() { calMonth--; if (calMonth<0) { calMonth=11; calYear--; } renderCalendar(); }
+  function nextMonth() { calMonth++; if (calMonth>11) { calMonth=0; calYear++; } renderCalendar(); }
 
   function renderCalendar() {
-    const title = document.getElementById('cal-title');
-    title.textContent = MONTHS_LONG[calMonth] + ' ' + calYear;
-
+    document.getElementById('cal-title').textContent = MONTHS_LONG[calMonth] + ' ' + calYear;
     const firstDay = new Date(calYear, calMonth, 1);
     const lastDay  = new Date(calYear, calMonth+1, 0);
-    // Monday-based: 0=Mon ... 6=Sun
     let startOffset = firstDay.getDay() - 1;
     if (startOffset < 0) startOffset = 6;
-
-    // Get all reservations across all years for this month
-    const allRes = Object.keys(ALL_DATA).flatMap(y => getRes(y));
-
-    const cells = document.getElementById('cal-cells');
+    const allRes = Object.values(ALL_DATA).flat();
     let html = '';
-
-    // Empty cells before first day
     for (let i=0; i<startOffset; i++) html += `<div class="cal-cell empty"></div>`;
-
     for (let d=1; d<=lastDay.getDate(); d++) {
       const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
       const isToday = dateStr === today;
-
-      // Find stays active on this day
       const stays = allRes.filter(r => r.checkin <= dateStr && r.checkout > dateStr);
-
       let barsHtml = stays.slice(0,2).map(r => {
-        const label = d === parseInt(r.checkin.split('-')[2]) ? r.name : '';
-        return `<div class="stay-bar stay-${r.platform}" title="${r.name}">${label}</div>`;
+        const label = dateStr === r.checkin ? r.name : '';
+        return `<div class="stay-bar stay-${r.platform}">${label}</div>`;
       }).join('');
-      if (stays.length > 2) barsHtml += `<div style="font-size:0.58rem;color:var(--muted)">+${stays.length-2}</div>`;
-
+      if (stays.length > 2) barsHtml += `<div style="font-size:0.55rem;color:var(--muted)">+${stays.length-2}</div>`;
       const hasStay = stays.length > 0;
-      const stayData = hasStay ? `data-stays='${JSON.stringify(stays.map(r=>( {name:r.name,platform:r.platform,checkin:r.checkin,checkout:r.checkout,nights:r.nights,lits:r.lits,menage:r.menage} ))).replace(/'/g,"&#39;")}'` : '';
-
-      html += `<div class="cal-cell${isToday?' today':''}${hasStay?' has-stay':''}" ${stayData}
-        ${hasStay?'onmouseenter="showTooltip(event,this)" onmouseleave="hideTooltip()" ontouchstart="showTooltip(event,this)"':''}>
-        <div class="cal-num">${d}</div>
-        ${barsHtml}
-      </div>`;
+      const stayData = hasStay ? `data-stays='${JSON.stringify(stays.map(r=>( {name:r.name,platform:r.platform,checkin:r.checkin,checkout:r.checkout,nights:r.nights,lits:r.lits,personnes:r.personnes,animal:r.animal,menage:r.menage} ))).replace(/'/g,"&#39;")}'` : '';
+      html += `<div class="cal-cell${isToday?' today':''}${hasStay?' has-stay':''}" ${stayData} ${hasStay?'onmouseenter="showTooltip(event,this)" onmouseleave="hideTooltip()" ontouchstart="showTooltip(event,this)"':''}>
+        <div class="cal-num">${d}</div>${barsHtml}</div>`;
     }
-
-    // Fill remaining cells
     const total = startOffset + lastDay.getDate();
-    const remainder = total % 7;
-    if (remainder > 0) for (let i=0; i<7-remainder; i++) html += `<div class="cal-cell empty"></div>`;
-
-    cells.innerHTML = html;
+    const rem = total % 7;
+    if (rem > 0) for (let i=0; i<7-rem; i++) html += `<div class="cal-cell empty"></div>`;
+    document.getElementById('cal-cells').innerHTML = html;
   }
 
   function showTooltip(e, cell) {
@@ -318,8 +218,8 @@
       let content = stays.map(r => {
         const ci = new Date(r.checkin+'T12:00:00');
         const co = new Date(r.checkout+'T12:00:00');
-        const platform = r.platform==='airbnb'?'Airbnb':r.platform==='booking'?'Booking':'Direct';
-        let lines = `<strong>${r.name}</strong><br>${ci.getDate()} ${MONTHS_FR[ci.getMonth()]} → ${co.getDate()} ${MONTHS_FR[co.getMonth()]}<br>${platform}`;
+        const pl = r.platform==='airbnb'?'Airbnb':r.platform==='booking'?'Booking':'Direct';
+        let lines = `<strong>${r.name}</strong><br>${ci.getDate()} ${MONTHS_FR[ci.getMonth()]} → ${co.getDate()} ${MONTHS_FR[co.getMonth()]}<br>${pl}`;
         if (r.nights)    lines += ` · ${r.nights} nuit${r.nights>1?'s':''}`;
         if (r.personnes) lines += `<br>👤 ${r.personnes} pers.`;
         if (r.animal==='CHIEN') lines += `<br>🐶 Chien`;
@@ -334,16 +234,11 @@
       let left = rect.left + window.scrollX;
       let top  = rect.bottom + window.scrollY + 6;
       if (left + 210 > window.innerWidth) left = window.innerWidth - 220;
-      tooltip.style.left = left + 'px';
-      tooltip.style.top  = top  + 'px';
+      tooltip.style.left = left+'px'; tooltip.style.top = top+'px';
     } catch(err) {}
   }
+  function hideTooltip() { document.getElementById('tooltip').style.display='none'; }
 
-  function hideTooltip() {
-    document.getElementById('tooltip').style.display = 'none';
-  }
-
-  // ——— List ———
   function setFilter(f, btn) {
     currentFilter = f;
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -353,60 +248,44 @@
 
   function renderList() {
     const list = document.getElementById('list');
-    let items = [...getRes(currentYear)];
-    const monthlyTotals = getMonthlyTotals(currentYear);
+    let items = [...(ALL_DATA[currentYear]||[])];
     if (currentFilter==='upcoming') items = items.filter(r=>r.checkout>=today);
     else if (currentFilter==='past') items = items.filter(r=>r.checkout<today);
     items.sort((a,b)=>a.checkin.localeCompare(b.checkin));
     document.getElementById('count-label').textContent = `${items.length} séjour${items.length!==1?'s':''}`;
-
     if (!items.length) {
       list.innerHTML = `<div class="empty-state"><div class="icon">📅</div><p>Aucun séjour pour ${currentYear}</p></div>`;
       return;
     }
-
     let html='', lastMonth='';
     for (const r of items) {
       const isPast = r.checkout < today;
       const ci = new Date(r.checkin+'T12:00:00');
       const co = new Date(r.checkout+'T12:00:00');
       const ml = MONTHS_LONG[ci.getMonth()];
-      if (ml!==lastMonth) {
-        // Monthly recap for previous month
-        if (lastMonth) {
-          const prevKey = items.find(x => MONTHS_LONG[new Date(x.checkin+'T12:00:00').getMonth()]===lastMonth);
-          if (prevKey) {
-            const mk = prevKey.checkin.substring(0,7);
-            const total = monthlyTotals[mk];
-            if (total) html += `<div class="month-recap">🧹 Total ménage : <strong>${Number(total).toLocaleString('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0})}</strong></div>`;
-          }
-        }
-        html+=`<div class="month-sep">${ml}</div>`;
-        lastMonth=ml;
-      }
-      const pLabel = r.platform==='airbnb'?'Airbnb':r.platform==='booking'?'Booking':'Direct';
-      const nightsTag   = r.nights    ? `<span class="tag tag-nights">🌙 ${r.nights} nuit${r.nights>1?'s':''}</span>` : '';
-      const litsTag     = r.lits      ? `<span class="tag tag-beds">🛏 ${r.lits} lit${r.lits>1?'s':''}</span>` : '';
-      const personnesTag= r.personnes ? `<span class="tag tag-persons">👤 ${r.personnes} pers.</span>` : '';
-      const animalTag   = r.animal==='CHIEN' ? `<span class="tag tag-dog">🐶 Chien</span>` : r.animal==='CHAT' ? `<span class="tag tag-cat">🐱 Chat</span>` : '';
-      const menageTag   = r.menage    ? `<span class="tag tag-menage">🧹 ${Number(r.menage).toLocaleString('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0})}</span>` : '';
-      html += `
-        <div class="card platform-${r.platform}${isPast?' past':''}">
-          <div class="card-left">
-            <div class="date-day">${ci.getDate()}</div>
-            <div class="date-month">${MONTHS_FR[ci.getMonth()]}</div>
-            <div class="date-sep">↓</div>
-            <div class="date-day">${co.getDate()}</div>
-            <div class="date-month">${MONTHS_FR[co.getMonth()]}</div>
+      if (ml!==lastMonth) { html+=`<div class="month-sep">${ml}</div>`; lastMonth=ml; }
+      const pl = r.platform==='airbnb'?'Airbnb':r.platform==='booking'?'Booking':'Direct';
+      const nightsTag    = r.nights    ? `<span class="tag tag-nights">🌙 ${r.nights} nuit${r.nights>1?'s':''}</span>` : '';
+      const litsTag      = r.lits      ? `<span class="tag tag-beds">🛏 ${r.lits} lit${r.lits>1?'s':''}</span>` : '';
+      const personnesTag = r.personnes ? `<span class="tag tag-persons">👤 ${r.personnes} pers.</span>` : '';
+      const animalTag    = r.animal==='CHIEN' ? `<span class="tag tag-dog">🐶 Chien</span>` : r.animal==='CHAT' ? `<span class="tag tag-cat">🐱 Chat</span>` : '';
+      const menageTag    = r.menage    ? `<span class="tag tag-menage">🧹 ${Number(r.menage).toLocaleString('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0})}</span>` : '';
+      html += `<div class="card platform-${r.platform}${isPast?' past':''}">
+        <div class="card-left">
+          <div class="date-day">${ci.getDate()}</div>
+          <div class="date-month">${MONTHS_FR[ci.getMonth()]}</div>
+          <div class="date-sep">↓</div>
+          <div class="date-day">${co.getDate()}</div>
+          <div class="date-month">${MONTHS_FR[co.getMonth()]}</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">${r.name}</div>
+          <div class="card-meta">
+            <span class="tag tag-platform tag-${r.platform}">${pl}</span>
+            ${nightsTag}${litsTag}${personnesTag}${animalTag}${menageTag}
           </div>
-          <div class="card-body">
-            <div class="card-name">${r.name}</div>
-            <div class="card-meta">
-              <span class="tag tag-platform tag-${r.platform}">${pLabel}</span>
-              ${nightsTag}${litsTag}${personnesTag}${animalTag}${menageTag}
-            </div>
-          </div>
-        </div>`;
+        </div>
+      </div>`;
     }
     list.innerHTML = html;
   }
