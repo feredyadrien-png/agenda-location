@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda Location</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#F7F4EF; --surface:#FFFFFF; --border:#E8E2D9;
+    --text:#1A1714; --muted:#8C8278; --accent:#C4873A;
+    --green:#2D6A4F; --red:#C0392B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:18px 20px;
+    position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between}
+  header h1{font-family:'DM Serif Display',serif;font-size:1.4rem;letter-spacing:-0.02em}
+  .updated{font-size:0.72rem;color:var(--muted)}
+  .container{max-width:680px;margin:0 auto;padding:20px 16px 80px}
+  .year-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px}
+  .year-tab{padding:6px 16px;border-radius:20px;border:1px solid var(--border);background:var(--surface);
+    font-size:0.82rem;font-weight:500;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;
+    white-space:nowrap;transition:all 0.15s}
+  .year-tab.active{background:var(--text);color:white;border-color:var(--text)}
+  .filter-bar{display:flex;gap:6px;margin-bottom:18px;overflow-x:auto;padding-bottom:2px}
+  .filter-btn{padding:5px 13px;border-radius:20px;border:1px solid var(--border);background:var(--surface);
+    font-size:0.75rem;font-weight:500;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif;
+    white-space:nowrap;transition:all 0.15s}
+  .filter-btn.active{background:var(--accent);color:white;border-color:var(--accent)}
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .section-header h2{font-family:'DM Serif Display',serif;font-size:1.05rem}
+  .count-label{font-size:0.75rem;color:var(--muted)}
+  .reservations-list{display:flex;flex-direction:column;gap:10px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;
+    display:flex;gap:14px;align-items:flex-start;transition:box-shadow 0.15s}
+  .card:hover{box-shadow:0 3px 14px rgba(0,0,0,0.06)}
+  .card.past{opacity:0.42}
+  .card-left{min-width:46px;text-align:center;flex-shrink:0}
+  .date-day{font-family:'DM Serif Display',serif;font-size:1.5rem;line-height:1}
+  .date-month{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);font-weight:500}
+  .date-sep{font-size:0.7rem;color:var(--border);margin:3px 0}
+  .card-body{flex:1;min-width:0}
+  .card-name{font-weight:500;font-size:0.95rem;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card-meta{display:flex;flex-wrap:wrap;gap:5px}
+  .tag{font-size:0.7rem;padding:3px 8px;border-radius:20px;font-weight:500;display:inline-flex;align-items:center;gap:3px}
+  .tag-nights{background:#F0EDE8;color:var(--muted)}
+  .tag-beds{background:#E8F4F0;color:var(--green)}
+  .tag-menage{background:#FEF3E2;color:var(--accent)}
+  .month-sep{font-size:0.7rem;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);padding:10px 4px 2px}
+  .empty-state{text-align:center;padding:52px 24px;color:var(--muted)}
+  .empty-state .icon{font-size:2.8rem;margin-bottom:12px}
+  .empty-state p{font-size:0.88rem;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏠 Agenda Location</h1>
+  <span class="updated">Mis à jour le 29/03/2026 à 09:10</span>
+</header>
+<div class="container">
+  <div class="year-tabs" id="year-tabs"></div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('upcoming',this)">À venir</button>
+    <button class="filter-btn" onclick="setFilter('all',this)">Tous</button>
+    <button class="filter-btn" onclick="setFilter('past',this)">Passés</button>
+  </div>
+  <div class="section-header">
+    <h2>Réservations</h2>
+    <span class="count-label" id="count-label"></span>
+  </div>
+  <div class="reservations-list" id="list"></div>
+</div>
+<script>
+  const ALL_DATA = {"2024": [{"name": "Pailler", "checkin": "2024-08-04", "checkout": "2024-08-06", "nights": 2, "menage": 20.0, "lits": 2}, {"name": "Dominique", "checkin": "2024-08-06", "checkout": "2024-08-10", "nights": 4, "menage": 50.0, "lits": 1}, {"name": "Sabrina", "checkin": "2024-08-10", "checkout": "2024-08-12", "nights": 2, "menage": 20.0, "lits": 2}, {"name": "Floriane", "checkin": "2024-08-12", "checkout": "2024-08-14", "nights": 2, "menage": 20.0, "lits": 2}, {"name": "Noriko", "checkin": "2024-08-14", "checkout": "2024-08-25", "nights": 11, "menage": 50.0, "lits": 1}, {"name": "Franck", "checkin": "2024-08-26", "checkout": "2024-08-30", "nights": 4, "menage": 50.0, "lits": 2}, {"name": "Pailler", "checkin": "2024-08-30", "checkout": "2024-09-01", "nights": 2, "menage": 20.0, "lits": 2}, {"name": "Michel", "checkin": "2024-09-09", "checkout": "2024-09-11", "nights": 2, "menage": 20.0, "lits": 2}, {"name": "Hanck", "checkin": "2024-09-12", "checkout": "2024-09-15", "nights": 3, "menage": 50.0, "lits": 1}, {"name": "Alessandro", "checkin": "2024-09-23", "checkout": "2024-09-27", "nights": 4, "menage": 50.0, "lits": 2}, {"name": "Sandrine", "checkin": "2024-09-27", "checkout": "2024-09-29", "nights": 2, "menage": 20.0, "lits": 2}, {"name": "Alessandro", "checkin": "2024-10-07", "checkout": "2024-01-11", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Fiona", "checkin": "2024-10-11", "checkout": "2024-10-14", "nights": 3, "menage": 30.0, "lits": 1}, {"name": "Philippe", "checkin": "2024-10-14", "checkout": "2024-10-16", "nights": 2, "menage": 20.0, "lits": 1}, {"name": "Jimmy", "checkin": "2024-10-18", "checkout": "2024-10-21", "nights": 3, "menage": 50.0, "lits": 2}, {"name": "Alexandre", "checkin": "2024-10-28", "checkout": "2024-10-31", "nights": 3, "menage": 30.0, "lits": 1}, {"name": "Franck", "checkin": "2024-11-01", "checkout": "2024-11-04", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Alessandro", "checkin": "2024-11-04", "checkout": "2024-11-08", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Alisone", "checkin": "2024-11-08", "checkout": "2024-11-10", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Alessandro", "checkin": "2024-11-12", "checkout": "2024-11-14", "nights": "", "menage": "", "lits": ""}, {"name": "Théo", "checkin": "2024-12-03", "checkout": "2024-12-05", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Gaelle", "checkin": "2024-12-13", "checkout": "2024-12-16", "nights": 3, "menage": 50.0, "lits": 2}, {"name": "Marie", "checkin": "2024-12-26", "checkout": "2025-01-02", "nights": 7, "menage": 50.0, "lits": 1}], "2025": [{"name": "Raverdy", "checkin": "2025-01-03", "checkout": "2025-01-05", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Axel", "checkin": "2025-01-06", "checkout": "2025-01-08", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Caroline", "checkin": "2025-01-14", "checkout": "2025-01-17", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Maélys", "checkin": "2025-01-18", "checkout": "2025-01-20", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Ferreira", "checkin": "2025-01-27", "checkout": "2025-01-30", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Ferreira", "checkin": "2025-02-03", "checkout": "2025-02-05", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Sarah", "checkin": "2025-02-21", "checkout": "2025-02-23", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Sandrine", "checkin": "2025-02-23", "checkout": "2025-02-25", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Manon", "checkin": "2025-03-04", "checkout": "2025-03-06", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Eloise", "checkin": "2025-03-21", "checkout": "2025-03-23", "nights": 2, "menage": 30.0, "lits": 1}, {"name": "Christel", "checkin": "2025-03-25", "checkout": "2025-03-37", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Murielle", "checkin": "2025-04-06", "checkout": "2025-04-11", "nights": 5, "menage": 30.0, "lits": 2}, {"name": "Cécile", "checkin": "2025-04-12", "checkout": "2025-04-19", "nights": 7, "menage": 50.0, "lits": 2}, {"name": "Jean Christophe", "checkin": "2025-04-19", "checkout": "2025-04-21", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Emilie", "checkin": "2025-04-28", "checkout": "2025-04-30", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Aymeric", "checkin": "2025-04-30", "checkout": "2025-05-04", "nights": 4, "menage": 50.0, "lits": 1}, {"name": "Karine", "checkin": "2025-05-07", "checkout": "2025-05-09", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Angélique", "checkin": "2025-11-09", "checkout": "2025-11-11", "nights": 2, "menage": 50.0, "lits": 1}, {"name": "Hatem", "checkin": "2025-05-13", "checkout": "2025-05-16", "nights": 3, "menage": 40.0, "lits": 2}, {"name": "Skander", "checkin": "2025-05-23", "checkout": "2025-05-30", "nights": 7, "menage": 30.0, "lits": 2}, {"name": "Lea Navarro", "checkin": "2025-05-31", "checkout": "2025-06-03", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Elodie", "checkin": "2025-06-07", "checkout": "2025-06-11", "nights": 4, "menage": 50.0, "lits": 1}, {"name": "Alain", "checkin": "2025-06-15", "checkout": "2025-06-22", "nights": 7, "menage": 30.0, "lits": 1}, {"name": "Cécile", "checkin": "2025-06-22", "checkout": "2025-06-28", "nights": 6, "menage": 30.0, "lits": 2}, {"name": "Jordan", "checkin": "2025-07-07", "checkout": "2025-07-10", "nights": 3, "menage": 50.0, "lits": 2}, {"name": "Antoine", "checkin": "2025-07-17", "checkout": "2025-07-21", "nights": 4, "menage": 40.0, "lits": 1}, {"name": "Marie-Cécile", "checkin": "2025-07-21", "checkout": "2025-07-25", "nights": 4, "menage": 40.0, "lits": 2}, {"name": "Cam", "checkin": "2025-07-25", "checkout": "2025-07-27", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Marlène", "checkin": "2025-07-27", "checkout": "2025-08-01", "nights": 5, "menage": 50.0, "lits": 2}, {"name": "Julien", "checkin": "2025-08-01", "checkout": "2025-08-03", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Richard", "checkin": "2025-08-04", "checkout": "2025-08-08", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Ophélie", "checkin": "2025-08-09", "checkout": "2025-08-16", "nights": 7, "menage": 30.0, "lits": 2}, {"name": "Joelle", "checkin": "2025-08-16", "checkout": "2025-08-22", "nights": 6, "menage": 30.0, "lits": 2}, {"name": "Coelho", "checkin": "2025-08-22", "checkout": "2025-08-29", "nights": 7, "menage": 50.0, "lits": 2}, {"name": "Sowaly", "checkin": "2025-09-05", "checkout": "2025-09-08", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Isabelle et René", "checkin": "2025-09-10", "checkout": "2025-09-15", "nights": 5, "menage": 30.0, "lits": 2}, {"name": "Camille Emma", "checkin": "2025-09-16", "checkout": "2025-09-19", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Erwan", "checkin": "2025-09-19", "checkout": "2025-09-21", "nights": 2, "menage": 50.0, "lits": 1}, {"name": "Caroline", "checkin": "2025-09-29", "checkout": "2025-10-10", "nights": 11, "menage": 30.0, "lits": 2}, {"name": "Olivier", "checkin": "2025-10-20", "checkout": "2025-10-22", "nights": 2, "menage": 50.0, "lits": 2}, {"name": "Lucie", "checkin": "2025-10-22", "checkout": "2025-10-24", "nights": 2, "menage": 50.0, "lits": 2}, {"name": "Fabienne", "checkin": "2025-10-13", "checkout": "2025-10-17", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Aurélie", "checkin": "2025-10-24", "checkout": "2025-10-27", "nights": 3, "menage": 50.0, "lits": 2}, {"name": "Jean Marc", "checkin": "2025-10-27", "checkout": "2025-10-30", "nights": 3, "menage": 30.0, "lits": 2}, {"name": "Audrey", "checkin": "2025-10-30", "checkout": "2025-11-01", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Pascal", "checkin": "2025-11-08", "checkout": "2025-11-11", "nights": 3, "menage": 30.0, "lits": 3}, {"name": "Ayoub", "checkin": "2025-11-26", "checkout": "2025-11-28", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Pat", "checkin": "2025-12-14", "checkout": "2025-12-21", "nights": 7, "menage": 50.0, "lits": 2}, {"name": "Helene", "checkin": "2025-12-22", "checkout": "2025-12-28", "nights": 6, "menage": 50.0, "lits": 2}], "2026": [{"name": "Anicet", "checkin": "2026-01-26", "checkout": "2026-01-30", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Celine", "checkin": "2026-01-30", "checkout": "2026-02-01", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Mickael", "checkin": "2026-02-03", "checkout": "2026-02-05", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Anicet", "checkin": "2026-02-06", "checkout": "2026-02-10", "nights": 5, "menage": 30.0, "lits": 2}, {"name": "Cathy", "checkin": "2026-02-14", "checkout": "2026-02-16", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Laure", "checkin": "2026-02-19", "checkout": "2026-02-21", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Arié", "checkin": "2026-03-01", "checkout": "2026-03-05", "nights": 4, "menage": 30.0, "lits": 1}, {"name": "Jerome", "checkin": "2026-03-06", "checkout": "2026-03-08", "nights": 2, "menage": 30.0, "lits": 2}, {"name": "Timothée", "checkin": "2026-03-09", "checkout": "2026-03-13", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Bernard", "checkin": "2026-03-18", "checkout": "2026-03-25", "nights": 7, "menage": 30.0, "lits": 1}, {"name": "Rouland", "checkin": "2026-03-30", "checkout": "2026-04-01", "nights": 2, "menage": 60.0, "lits": 1}, {"name": "Saioa", "checkin": "2026-04-02", "checkout": "2026-08-06", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Jimmy", "checkin": "2026-04-08", "checkout": "2026-04-13", "nights": 5, "menage": 30.0, "lits": 2}, {"name": "Nathalie", "checkin": "2026-04-13", "checkout": "2026-04-20", "nights": 7, "menage": 30.0, "lits": 2}, {"name": "Chantale", "checkin": "2026-04-20", "checkout": "2026-04-24", "nights": 4, "menage": 50.0, "lits": 2}, {"name": "Vitor", "checkin": "2026-04-25", "checkout": "2026-05-02", "nights": 7, "menage": 30.0, "lits": 1}, {"name": "Daniel", "checkin": "2026-05-04", "checkout": "2026-05-09", "nights": 5, "menage": 30.0, "lits": 2}, {"name": "Isabelle", "checkin": "2026-05-18", "checkout": "2026-05-22", "nights": 4, "menage": 30.0, "lits": 2}, {"name": "Brigitte", "checkin": "2026-05-25", "checkout": "2026-05-29", "nights": 5, "menage": 30.0, "lits": 2}, {"name": "Johan", "checkin": "2026-07-04", "checkout": "2026-07-18", "nights": 14, "menage": 50.0, "lits": 1}, {"name": "Laura", "checkin": "2026-08-02", "checkout": "2026-08-08", "nights": 6, "menage": 30.0, "lits": 2}, {"name": "Estelle", "checkin": "2026-08-08", "checkout": "2026-08-15", "nights": 7, "menage": 30.0, "lits": 2}, {"name": "Melody", "checkin": "2026-08-08", "checkout": "2026-08-15", "nights": 7, "menage": 30.0, "lits": 2}]};
+  const MONTHS_FR   = ['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
+  const MONTHS_LONG = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+  let currentYear = '';
+  let currentFilter = 'upcoming';
+
+  const today = new Date().toISOString().split('T')[0];
+  const years = Object.keys(ALL_DATA).sort((a,b)=>b-a);
+
+  // Default to year with upcoming reservations
+  for (const y of years) {
+    if (ALL_DATA[y].some(r => r.checkout >= today)) { currentYear = y; break; }
+  }
+  if (!currentYear && years.length) currentYear = years[0];
+
+  function renderYearTabs() {
+    document.getElementById('year-tabs').innerHTML = years.map(y =>
+      `<button class="year-tab ${y===currentYear?'active':''}" onclick="setYear('${y}',this)">${y}</button>`
+    ).join('');
+  }
+
+  function setYear(y, btn) {
+    currentYear = y;
+    document.querySelectorAll('.year-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderList();
+  }
+
+  function setFilter(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderList();
+  }
+
+  function renderList() {
+    const list = document.getElementById('list');
+    let items = [...(ALL_DATA[currentYear]||[])];
+    if (currentFilter==='upcoming') items = items.filter(r=>r.checkout>=today);
+    else if (currentFilter==='past') items = items.filter(r=>r.checkout<today);
+    items.sort((a,b)=>a.checkin.localeCompare(b.checkin));
+    document.getElementById('count-label').textContent = `${items.length} séjour${items.length!==1?'s':''}`;
+
+    if (!items.length) {
+      list.innerHTML = `<div class="empty-state"><div class="icon">📅</div><p>Aucun séjour à afficher<br>pour ${currentYear}</p></div>`;
+      return;
+    }
+
+    let html='', lastMonth='';
+    for (const r of items) {
+      const isPast = r.checkout < today;
+      const ci = new Date(r.checkin+'T12:00:00');
+      const co = new Date(r.checkout+'T12:00:00');
+      const ml = MONTHS_LONG[ci.getMonth()];
+      if (ml!==lastMonth) { html+=`<div class="month-sep">${ml}</div>`; lastMonth=ml; }
+      const nightsTag = r.nights ? `<span class="tag tag-nights">🌙 ${r.nights} nuit${r.nights>1?'s':''}</span>` : '';
+      const litsTag   = r.lits   ? `<span class="tag tag-beds">🛏 ${r.lits} lit${r.lits>1?'s':''}</span>` : '';
+      const menageTag = r.menage ? `<span class="tag tag-menage">🧹 ${Number(r.menage).toLocaleString('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0})}</span>` : '';
+      html += `
+        <div class="card ${isPast?'past':''}">
+          <div class="card-left">
+            <div class="date-day">${ci.getDate()}</div>
+            <div class="date-month">${MONTHS_FR[ci.getMonth()]}</div>
+            <div class="date-sep">↓</div>
+            <div class="date-day">${co.getDate()}</div>
+            <div class="date-month">${MONTHS_FR[co.getMonth()]}</div>
+          </div>
+          <div class="card-body">
+            <div class="card-name">${r.name}</div>
+            <div class="card-meta">${nightsTag}${litsTag}${menageTag}</div>
+          </div>
+        </div>`;
+    }
+    list.innerHTML = html;
+  }
+
+  renderYearTabs();
+  renderList();
+</script>
+</body>
+</html>
