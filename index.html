@@ -108,7 +108,7 @@
     <div class="legend-item"><div class="legend-dot" style="background:var(--airbnb)"></div>Airbnb</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--booking)"></div>Booking</div>
     <div class="legend-item"><div class="legend-dot" style="background:var(--direct)"></div>Direct</div>
-    <span style="font-size:0.7rem;color:var(--muted);margin-left:auto">Mis à jour le 29/03/2026 à 18:15</span>
+    <span style="font-size:0.7rem;color:var(--muted);margin-left:auto">Mis à jour le 29/03/2026 à 18:19</span>
   </div>
   <div id="view-calendar" style="display:none">
     <div class="cal-nav">
@@ -198,7 +198,7 @@
       let barsHtml = stays.slice(0,2).map(r => {
         const isArrival   = dateStr === r.checkin;
         const isDeparture = dateStr === r.checkout;
-        const badge = isArrival && isDeparture ? ' 🔄' : isArrival ? ' <span style="font-weight:700;font-size:0.65rem">A</span>' : isDeparture ? ' <span style="font-weight:700;font-size:0.65rem">D</span>' : '';
+        const badge = isArrival && isDeparture ? ' <span style="background:white;color:#E07A3A;border-radius:3px;padding:0 2px;font-weight:700;font-size:0.6rem">A/D</span>' : isArrival ? ' <span style="background:white;color:#2D6A4F;border-radius:3px;padding:0 2px;font-weight:700;font-size:0.6rem">A</span>' : isDeparture ? ' <span style="background:white;color:#E07A3A;border-radius:3px;padding:0 2px;font-weight:700;font-size:0.6rem">D</span>' : '';
         const label = isArrival ? r.name : '';
         const opacity = isDeparture && !isArrival ? 'opacity:0.5;' : '';
         return `<div class="stay-bar stay-${r.platform}" style="${opacity}">${label}${badge}</div>`;
